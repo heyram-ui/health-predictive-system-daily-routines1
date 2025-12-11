@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="page-container">
+
+    <div class="card">
+        <h2>User Profile</h2>
+
+        <p><strong>Username:</strong> {{ username }}</p>
+
+        <p>You have made <strong>{{ total_predictions }}</strong> predictions so far.</p>
+    </div>
+
+</div>
+
+{% endblock %}

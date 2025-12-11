@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+.register-wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: rgba(255,255,255,0.7);
+    margin-bottom: 12px;
+}
+button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: var(--secondary);
+    color: white;
+    font-size: 16px;
+}
+.card {
+    animation: fadeUp .9s ease-out;
+}
+</style>
+
+<div class="register-wrapper">
+    <div class="card" style="max-width:420px; margin:auto;">
+
+        <h2>Create Account</h2>
+        <p style="opacity:.7;">Join Aura Health Analytics</p>
+
+        <form method="POST">
+            <input type="text" name="username" placeholder="Choose Username" required>
+            <input type="password" name="password" placeholder="Create Password" required>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <p style="margin-top:12px;">
+            Already have an account? <a href="{{ url_for('login') }}">Login</a>
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}

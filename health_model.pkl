@@ -1,0 +1,11 @@
+from sklearn.linear_model import LogisticRegression
+import joblib
+import numpy as np
+
+# Dummy model
+X = np.random.rand(10, 6)
+y = np.random.randint(0, 2, 10)
+model = LogisticRegression().fit(X, y)
+
+joblib.dump(model, "health_model.pkl")
+print("health_model.pkl created!")

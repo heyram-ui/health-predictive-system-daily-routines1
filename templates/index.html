@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+.dashboard {
+    display: flex;
+    gap: 30px;
+}
+
+.sidebar {
+    width: 240px;
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 16px;
+    height: 90vh;
+    position: sticky;
+    top: 20px;
+}
+
+.sidebar h3 {
+    margin-bottom: 20px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text);
+    margin-bottom: 10px;
+    transition: .2s;
+}
+
+.sidebar a:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.main-area {
+    flex: 1;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cccc;
+    margin-bottom: 12px;
+}
+button {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 16px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+</style>
+
+<div class="page-container">
+
+    <div class="dashboard">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>Welcome, {{ username }}</h3>
+
+            <a href="{{ url_for('index') }}">Dashboard</a>
+            <a href="#">My Profile</a>
+            <a href="#">History</a>
+            <a href="#">Settings</a>
+            <a href="{{ url_for('logout') }}" style="color:red;">Logout</a>
+        </div>
+
+
+        <!-- Main Content -->
+        <div class="main-area">
+
+            <div class="card">
+                <h2>Predict Health Risk</h2>
+
+                <form method="POST">
+                    <div class="grid">
+
+                        <div>
+                            <label>Gender</label>
+                            <select name="gender">
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+
+                            <label>Age</label>
+                            <input type="number" name="age">
+
+                            <label>Sleep Duration</label>
+                            <input type="number" name="sleep_duration" step="0.1">
+
+                            <label>Quality of Sleep</label>
+                            <input type="number" step="0.1" name="quality_sleep">
+                        </div>
+
+                        <div>
+                            <label>Physical Activity</label>
+                            <input type="number" name="activity">
+
+                            <label>Stress Level</label>
+                            <input type="number" name="stress">
+
+                            <label>BMI Category</label>
+                            <select name="bmi">
+                                <option>Underweight</option>
+                                <option>Normal</option>
+                                <option>Overweight</option>
+                                <option>Obese</option>
+                            </select>
+
+                            <label>Heart Rate</label>
+                            <input type="number" name="heart_rate">
+
+                            <label>Daily Steps</label>
+                            <input type="number" name="steps">
+                        </div>
+                    </div>
+
+                    <button type="submit">Predict Now</button>
+
+                </form>
+            </div>
+
+
+            <!-- SHOW RESULTS -->
+            {% if prediction %}
+            <div class="card">
+                <h3>Prediction Output</h3>
+                <p><strong>{{ prediction }}</strong></p>
+
+                <canvas id="riskChart"></canvas>
+
+                <script>
+                new Chart(document.getElementById("riskChart"), {
+                    type: "doughnut",
+                    data: {
+                        labels: ["Health Risk", "Healthy"],
+                        datasets: [{
+                            data: [70, 30],
+                            backgroundColor: ["#ff4d4d", "#00e3ae"]
+                        }]
+                    }
+                })
+                </script>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

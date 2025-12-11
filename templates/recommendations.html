@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+.tip-card {
+    padding: 15px;
+    margin-bottom: 12px;
+    border-left: 6px solid var(--primary);
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+</style>
+
+<div class="page-container">
+
+    <h2>Personalized Recommendations for {{ risk|title }}</h2>
+
+    {% for tip in tips %}
+    <div class="tip-card">
+        <p>{{ tip }}</p>
+    </div>
+    {% endfor %}
+
+    <a href="{{ url_for('history') }}">Back to History</a>
+
+</div>
+
+{% endblock %}

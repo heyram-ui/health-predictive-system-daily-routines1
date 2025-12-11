@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+.result-card {
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+    animation: fadeUp .8s ease-out;
+}
+</style>
+
+<div class="page-container">
+
+    <div class="card result-card">
+
+        <h2>Your Health Risk Result</h2>
+        <h3>{{ prediction }}</h3>
+
+        <canvas id="gauge"></canvas>
+
+        <script>
+        new Chart(document.getElementById("gauge"), {
+            type: "doughnut",
+            data: {
+                labels: ["Risk", "Healthy"],
+                datasets: [{
+                    data: [60, 40],
+                    backgroundColor: ["#ff4d4d", "#00e3ae"]
+                }]
+            },
+            options: {
+                cutout: "70%"
+            }
+        });
+        </script>
+
+        <h3>Recommendations</h3>
+        <p>Based on your risk, here are some suggested improvements:</p>
+        <ul style="text-align:left;">
+            <li>Increase water intake</li>
+            <li>Get 7-8 hours of consistent sleep</li>
+            <li>Follow light daily exercises</li>
+            <li>Reduce screen time before bed</li>
+        </ul>
+
+        <a href="{{ url_for('index') }}">Back to Dashboard</a>
+    </div>
+
+</div>
+
+{% endblock %}
